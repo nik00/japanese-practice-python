@@ -2,7 +2,7 @@
 # encoding: utf-8
 import random
 
-japaneseDict = {
+hiraganaDict = {
 'a': u'あ',
 'i': u'い',
 'u': u'う',
@@ -51,19 +51,82 @@ japaneseDict = {
 'n': u'ん',
 }
 
+katakanaDict = { 
+'a': u'ア',
+'i': u'イ',
+'u': u'ウ',
+'e': u'エ',
+'o': u'オ',
+'ka': u'カ',
+'ki': u'キ',
+'ku': u'ク',
+'ke': u'ケ',
+'ko': u'コ',
+'sa': u'サ',
+'shi': u'シ',
+'su': u'ス',
+'se': u'セ',
+'so': u'ソ',
+'ta': u'タ',
+'chi': u'チ',
+'tsu': u'ツ',
+'te': u'テ',
+'to': u'ト',
+'na': u'ナ',
+'ni': u'ニ',
+'nu': u'ヌ',
+'ne': u'ネ',
+'no': u'ノ',
+'ha': u'ハ',
+'hi': u'ヒ',
+'fu': u'フ',
+'he': u'ヘ',
+'ho': u'ホ',
+'ma': u'マ',
+'mi': u'ミ',
+'mu': u'ム',
+'me': u'メ',
+'mo': u'モ',
+'ya': u'ヤ',
+'yu': u'ユ',
+'yo': u'ヨ',
+'ra': u'ラ',
+'ri': u'リ',
+'ru': u'ル',
+'re': u'レ',
+'ro': u'ロ',
+'wa': u'ワ',
+'wo': u'ヲ',
+'n': u'ン',
+}
+
+import argparse
+
 lengthOfOutput = 3
 numberOfDesiredSamples = 10
 
-printRomanji = False
-printHiragana = True
+parser = argparse.ArgumentParser(description='Generate some characters.')
+parser.add_argument('--hiragana', dest='hiragana', action='store_true', default=False)
+parser.add_argument('--katakana', dest='katakana', action='store_true', default=False)
+parser.add_argument('--romaji', dest='romaji', action='store_true', default=False)
+
+args = parser.parse_args()
+
+if args.hiragana:
+    japaneseDict = hiraganaDict
+elif args.katakana:
+    japaneseDict = katakanaDict
+else:
+    print "<No dictionary selected>"
+    
 
 for j in range (0, numberOfDesiredSamples):
 	print j,
 	for i in range(0, lengthOfOutput):
 		item = random.choice(list(japaneseDict.keys()))		
-		if printRomanji:
+		if args.romaji:
 			print item,
-		if printHiragana:
+		else:
 			print japaneseDict[item],
 	print 
 
