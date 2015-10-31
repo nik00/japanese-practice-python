@@ -102,8 +102,10 @@ katakanaDict = {
 
 import argparse
 
-lengthOfOutput = 3
-numberOfDesiredSamples = 10
+numberOfDesiredSamples = raw_input("How many random characters do you want? ")
+lengthOfOutput = raw_input("How many do you want there to be per line? ")
+lengthOfOutput = int(lengthOfOutput)
+numberOfDesiredSamples = int(numberOfDesiredSamples)
 
 parser = argparse.ArgumentParser(description='Generate some characters.')
 parser.add_argument('--hiragana', dest='hiragana', action='store_true', default=False)
