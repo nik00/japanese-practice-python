@@ -102,15 +102,12 @@ katakanaDict = {
 
 import argparse
 
-numberOfDesiredSamples = raw_input("How many random characters do you want? ")
-lengthOfOutput = raw_input("How many do you want there to be per line? ")
-lengthOfOutput = int(lengthOfOutput)
-numberOfDesiredSamples = int(numberOfDesiredSamples)
-
 parser = argparse.ArgumentParser(description='Generate some characters.')
 parser.add_argument('--hiragana', dest='hiragana', action='store_true', default=False)
 parser.add_argument('--katakana', dest='katakana', action='store_true', default=False)
 parser.add_argument('--romaji', dest='romaji', action='store_true', default=False)
+parser.add_argument('-w','--words', dest='numWords', type=int, default=10)
+parser.add_argument('-c','--characters', dest='charactersPerWord', type=int, default=3)
 
 args = parser.parse_args()
 
@@ -119,12 +116,12 @@ if args.hiragana:
 elif args.katakana:
     japaneseDict = katakanaDict
 else:
-    print "<No dictionary selected>"
+    #Defaulting to hiragana
+    japaneseDict = hiraganaDict
     
-
-for j in range (0, numberOfDesiredSamples):
+for j in range (0, args.numWords):
 	print j,
-	for i in range(0, lengthOfOutput):
+	for i in range(0, args.charactersPerWord):
 		item = random.choice(list(japaneseDict.keys()))		
 		if args.romaji:
 			print item,
